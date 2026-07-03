@@ -510,3 +510,88 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("Application Loaded Successfully");
 
 });
+/* ===========================
+   AQI Trend Chart
+=========================== */
+
+const chartCanvas = document.getElementById("aqiChart");
+
+if (chartCanvas) {
+
+    const ctx = chartCanvas.getContext("2d");
+
+    new Chart(ctx, {
+
+        type: "line",
+
+        data: {
+
+            labels: [
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+                "Sun"
+            ],
+
+            datasets: [{
+
+                label: "AQI",
+
+                data: [
+                    45,
+                    52,
+                    49,
+                    61,
+                    55,
+                    70,
+                    63
+                ],
+
+                borderColor: "#00c853",
+
+                backgroundColor: "rgba(0,200,83,0.15)",
+
+                fill: true,
+
+                tension: 0.4,
+
+                pointRadius: 5,
+
+                pointBackgroundColor: "#00c853"
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    display: true
+
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
