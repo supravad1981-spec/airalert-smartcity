@@ -596,3 +596,90 @@ maintainAspectRatio: false,
     });
 
 }
+/* ==========================================
+   Interactive Pollution Map
+========================================== */
+
+const mapContainer = document.getElementById("pollutionMap");
+
+if (mapContainer) {
+
+    const map = L.map("pollutionMap").setView([22.5726, 88.3639], 11);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    const locations = [
+
+        {
+            name: "Central Kolkata",
+            lat:22.5726,
+            lng:88.3639,
+            aqi:72,
+            color:"red"
+        },
+
+        {
+            name:"Salt Lake",
+            lat:22.5867,
+            lng:88.4172,
+            aqi:48,
+            color:"orange"
+        },
+
+        {
+            name:"New Town",
+            lat:22.5958,
+            lng:88.4737,
+            aqi:31,
+            color:"green"
+        },
+
+        {
+            name:"Howrah",
+            lat:22.5958,
+            lng:88.2636,
+            aqi:58,
+            color:"orange"
+        },
+
+        {
+            name:"Dum Dum",
+            lat:22.6200,
+            lng:88.4200,
+            aqi:67,
+            color:"red"
+        }
+
+    ];
+
+    locations.forEach(place=>{
+
+        L.circleMarker([place.lat,place.lng],{
+
+            radius:10,
+
+            color:place.color,
+
+            fillColor:place.color,
+
+            fillOpacity:0.9
+
+        })
+
+        .addTo(map)
+
+        .bindPopup(
+
+        `<b>${place.name}</b>
+
+        <br>
+
+        AQI : ${place.aqi}`
+
+        );
+
+    });
+
+}
