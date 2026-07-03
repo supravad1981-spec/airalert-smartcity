@@ -737,8 +737,8 @@ askBtn.onclick = function(){
 
     let answer="🤖 I can answer questions about AQI, pollution, weather and hotspots.";
 
-  const q = text.toLowerCase();
-
+const q = text.toLowerCase().trim();
+console.log("Question:", q);
 if (q.includes("aqi")) {
     answer = aiReplies.aqi;
 }
@@ -751,13 +751,8 @@ else if (q.includes("mask")) {
 else if (q.includes("pm") || q.includes("pm2.5")) {
     answer = aiReplies.pm25;
 }
-else if (
-    q.includes("hotspot") ||
-    q.includes("hot spot") ||
-    q.includes("polluted area") ||
-    q.includes("highest pollution")
-) {
-    answer = aiReplies.hotspot;
+else if (q === "hotspot") {
+    answer = "✅ HOTSPOT DETECTED!";
 }
 else if (
     q.includes("weather") ||
