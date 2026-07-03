@@ -696,115 +696,70 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
    AI Assistant
 =========================== */
 
+document.addEventListener("DOMContentLoaded", () => {
+
 const askBtn = document.getElementById("askAI");
 const userQuestion = document.getElementById("userQuestion");
 const chatArea = document.getElementById("chatArea");
 
-const aiReplies = {
-    pollution: "🚨 Pollution levels are currently moderate. Sensitive groups should reduce prolonged outdoor activity.",
-    aqi: "📊 Current AQI is around 55, which falls under the Moderate category.",
-    mask: "😷 A mask is recommended if AQI exceeds 100 or if you have respiratory conditions.",
-    pm25: "🌫 PM2.5 levels are within safe limits but should continue to be monitored.",
-    hotspot: "📍 Current hotspot detected near Central Kolkata based on simulated sensor readings.",
-    weather: "🌤 Weather conditions are favorable today with low wind speeds.",
-    default: "🤖 I can answer questions about AQI, pollution, PM2.5, hotspots, masks, weather and air quality."
-};
+if(!askBtn || !userQuestion || !chatArea){
+    console.log("AI Assistant not found");
+    return;
+}
 
-function askAI() {
+askBtn.onclick = function(){
 
     const text = userQuestion.value.trim();
 
-    if (!text) return;
+    if(text==="") return;
 
-    const userMsg = document.createElement("div");
-    userMsg.className = "user-message";
-    userMsg.innerHTML = text;
+    chatArea.innerHTML += `
+        <div class="user-message">${text}</div>
+    `;
 
-    chatArea.appendChild(userMsg);
+    userQuestion.value="";
 
-    userQuestion.value = "";
+    let answer="🤖 I can answer questions about AQI, pollution, weather and hotspots.";
 
-    const typing = document.createElement("div");
-    typing.className = "ai-message";
-    typing.innerHTML = "🤖 Thinking...";
-    chatArea.appendChild(typing);
+    const q=text.toLowerCase();
 
-    chatArea.scrollTop = chatArea.scrollHeight;
+    if(q.includes("aqi"))
+        answer="📊 Current AQI is 55 (Moderate).";
 
-    setTimeout(() => {
+    else if(q.includes("mask"))
+        answer="😷 Wear a mask if AQI exceeds 100.";
 
-        typing.remove();
+    else if(q.includes("pollution"))
+        answer="🌫 Pollution is currently moderate.";
 
-        const q = text.toLowerCase();
+    else if(q.includes("weather"))
+        answer="🌤 Weather is clear today.";
 
-        let answer = aiReplies.default;
+    else if(q.includes("hotspot"))
+        answer="📍 Central Kolkata is the current hotspot.";
 
-        if (q.includes("aqi")) answer = aiReplies.aqi;
-        else if (q.includes("mask")) answer = aiReplies.mask;
-        else if (q.includes("pollution")) answer = aiReplies.pollution;
-        else if (q.includes("pm")) answer = aiReplies.pm25;
-        else if (q.includes("hotspot")) answer = aiReplies.hotspot;
-        else if (q.includes("weather")) answer = aiReplies.weather;
+    setTimeout(()=>{
 
-        const ai = document.createElement("div");
-        ai.className = "ai-message";
-        ai.innerHTML = answer;
+        chatArea.innerHTML += `
+            <div class="ai-message">${answer}</div>
+        `;
 
-        chatArea.appendChild(ai);
+        chatArea.scrollTop=chatArea.scrollHeight;
 
-        chatArea.scrollTop = chatArea.scrollHeight;
+    },700);
 
-    }, 1000);
-}
+};
 
-document.addEventListener("DOMContentLoaded", () => {
+userQuestion.addEventListener("keydown",function(e){
 
-    const askBtn = document.getElementById("askAI");
-    const userQuestion = document.getElementById("userQuestion");
-    const chatArea = document.getElementById("chatArea");
+    if(e.key==="Enter"){
 
-    function askAI() {
+        askBtn.click();
 
-        const text = userQuestion.value.trim();
-
-        if (!text) return;
-
-        const user = document.createElement("div");
-        user.className = "user-message";
-        user.innerHTML = text;
-        chatArea.appendChild(user);
-
-        userQuestion.value = "";
-
-        const ai = document.createElement("div");
-        ai.className = "ai-message";
-
-        const q = text.toLowerCase();
-
-        if (q.includes("aqi"))
-            ai.innerHTML = "📊 Current AQI is 55 (Moderate).";
-        else if (q.includes("mask"))
-            ai.innerHTML = "😷 A mask is recommended if AQI exceeds 100.";
-        else if (q.includes("pollution"))
-            ai.innerHTML = "🌫 Pollution is moderate today.";
-        else if (q.includes("weather"))
-            ai.innerHTML = "🌤 Weather is clear with light wind.";
-        else
-            ai.innerHTML = "🤖 I can answer questions about AQI, pollution, weather and hotspots.";
-
-        setTimeout(() => {
-            chatArea.appendChild(ai);
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }, 600);
     }
 
-    askBtn.addEventListener("click", askAI);
-
-    userQuestion.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            askAI();
-        }
-    });
+});
 
 });
+
+
