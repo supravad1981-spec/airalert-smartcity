@@ -721,22 +721,38 @@ askBtn.onclick = function(){
 
     let answer="🤖 I can answer questions about AQI, pollution, weather and hotspots.";
 
-    const q=text.toLowerCase();
+  const q = text.toLowerCase();
 
-    if(q.includes("aqi"))
-        answer="📊 Current AQI is 55 (Moderate).";
-
-    else if(q.includes("mask"))
-        answer="😷 Wear a mask if AQI exceeds 100.";
-
-    else if(q.includes("pollution"))
-        answer="🌫 Pollution is currently moderate.";
-
-    else if(q.includes("weather"))
-        answer="🌤 Weather is clear today.";
-
-    else if(q.includes("hotspot"))
-        answer="📍 Central Kolkata is the current hotspot.";
+if (q.includes("aqi")) {
+    answer = aiReplies.aqi;
+}
+else if (q.includes("pollution")) {
+    answer = aiReplies.pollution;
+}
+else if (q.includes("mask")) {
+    answer = aiReplies.mask;
+}
+else if (q.includes("pm") || q.includes("pm2.5")) {
+    answer = aiReplies.pm25;
+}
+else if (
+    q.includes("hotspot") ||
+    q.includes("hot spot") ||
+    q.includes("polluted area") ||
+    q.includes("highest pollution")
+) {
+    answer = aiReplies.hotspot;
+}
+else if (
+    q.includes("weather") ||
+    q.includes("temperature") ||
+    q.includes("rain")
+) {
+    answer = aiReplies.weather;
+}
+else {
+    answer = aiReplies.default;
+}
 
     setTimeout(()=>{
 
