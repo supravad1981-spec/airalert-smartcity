@@ -692,3 +692,78 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     });
 
 }
+/* ===========================
+   AI Assistant
+=========================== */
+
+const askBtn = document.getElementById("askAI");
+const userQuestion = document.getElementById("userQuestion");
+const chatArea = document.getElementById("chatArea");
+
+const aiReplies = {
+    pollution: "🚨 Pollution levels are currently moderate. Sensitive groups should reduce prolonged outdoor activity.",
+    aqi: "📊 Current AQI is around 55, which falls under the Moderate category.",
+    mask: "😷 A mask is recommended if AQI exceeds 100 or if you have respiratory conditions.",
+    pm25: "🌫 PM2.5 levels are within safe limits but should continue to be monitored.",
+    hotspot: "📍 Current hotspot detected near Central Kolkata based on simulated sensor readings.",
+    weather: "🌤 Weather conditions are favorable today with low wind speeds.",
+    default: "🤖 I can answer questions about AQI, pollution, PM2.5, hotspots, masks, weather and air quality."
+};
+
+askBtn.addEventListener("click", () => {
+
+    const text = userQuestion.value.trim();
+
+    if(text==="") return;
+
+    const userMsg = document.createElement("div");
+    userMsg.className="user-message";
+    userMsg.innerHTML=text;
+
+    chatArea.appendChild(userMsg);
+
+    userQuestion.value="";
+
+    chatArea.scrollTop=chatArea.scrollHeight;
+
+    const typing=document.createElement("div");
+    typing.className="ai-message";
+    typing.innerHTML="🤖 Thinking...";
+    chatArea.appendChild(typing);
+
+    setTimeout(()=>{
+
+        typing.remove();
+
+        let answer=aiReplies.default;
+
+        const q=text.toLowerCase();
+
+        if(q.includes("aqi")) answer=aiReplies.aqi;
+        else if(q.includes("pollution")) answer=aiReplies.pollution;
+        else if(q.includes("mask")) answer=aiReplies.mask;
+        else if(q.includes("pm")) answer=aiReplies.pm25;
+        else if(q.includes("hotspot")) answer=aiReplies.hotspot;
+        else if(q.includes("weather")) answer=aiReplies.weather;
+
+        const ai=document.createElement("div");
+        ai.className="ai-message";
+        ai.innerHTML=answer;
+
+        chatArea.appendChild(ai);
+
+        chatArea.scrollTop=chatArea.scrollHeight;
+
+    },1200);
+
+});
+
+userQuestion.addEventListener("keypress",function(e){
+
+    if(e.key==="Enter"){
+
+        askBtn.click();
+
+    }
+
+});
