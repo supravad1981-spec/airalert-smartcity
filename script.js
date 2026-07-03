@@ -699,7 +699,6 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const askBtn = document.getElementById("askAI");
 const userQuestion = document.getElementById("userQuestion");
 const chatArea = document.getElementById("chatArea");
-
 const aiReplies = {
     pollution: "🚨 Pollution levels are currently moderate. Sensitive groups should reduce prolonged outdoor activity.",
     aqi: "📊 Current AQI is around 55, which falls under the Moderate category.",
