@@ -3,151 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AirAlert SmartCity</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-background:#eef6ff;
-color:#222;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-header{
-background:#0b5ed7;
-color:white;
-padding:25px;
-text-align:center;
-}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-.hero{
-padding:50px 20px;
-text-align:center;
-}
-
-.hero h1{
-font-size:42px;
-margin-bottom:15px;
-}
-
-.hero p{
-font-size:18px;
-max-width:900px;
-margin:auto;
-line-height:1.8;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:40px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 5px 12px rgba(0,0,0,.12);
-}
-
-.card h2{
-margin-bottom:15px;
-color:#0b5ed7;
-}
-
-.card p{
-line-height:1.7;
-}
-
-footer{
-background:#0b5ed7;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:30px;
-}
-</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
+
 <body>
 
-<header>
-<h1>AirAlert SmartCity</h1>
-<p>AI-powered Pollution Monitoring & Prediction Platform</p>
-</header>
+<nav>
+
+<div class="logo">
+🌍 AirAlert SmartCity
+</div>
+
+<ul>
+
+<li>Home</li>
+
+<li>Dashboard</li>
+
+<li>Prediction</li>
+
+<li>Alerts</li>
+
+<li>About</li>
+
+</ul>
+
+</nav>
 
 <section class="hero">
 
-<h1>Cleaner Air. Smarter Cities.</h1>
+<h1>
+AI Powered Pollution Monitoring Platform
+</h1>
 
 <p>
-AirAlert SmartCity combines citizen-uploaded pollution photos,
-IoT sensor readings, and satellite imagery to detect hidden pollution
-hotspots. Artificial Intelligence predicts air quality for the next
-24 hours and instantly alerts municipal authorities so resources such
-as water-mist cannons and cleanup crews can be deployed efficiently.
+
+Build a neighbourhood-level pollution map by combining citizen uploaded images, IoT sensor readings and satellite imagery. Detect pollution hotspots before they become dangerous.
+
 </p>
+
+<button>
+
+View Live Dashboard
+
+</button>
 
 </section>
 
-<section class="cards">
+<section class="stats">
+
+<div class="box">
+
+<h2>126</h2>
+
+<p>Citizen Reports</p>
+
+</div>
+
+<div class="box">
+
+<h2>42</h2>
+
+<p>Hotspots Detected</p>
+
+</div>
+
+<div class="box">
+
+<h2>87</h2>
+
+<p>Live Sensors</p>
+
+</div>
+
+<div class="box">
+
+<h2>94%</h2>
+
+<p>Prediction Accuracy</p>
+
+</div>
+
+</section>
+
+<section class="dashboard">
 
 <div class="card">
-<h2>📸 Citizen Reports</h2>
-<p>
-Residents upload smoke, dust and waste images that are automatically
-analysed using AI.
-</p>
+
+<h2>🗺 Pollution Heat Map</h2>
+
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200" width="100%">
+
 </div>
 
 <div class="card">
-<h2>📡 Sensor Data</h2>
-<p>
-Live air quality sensors monitor PM2.5, PM10, CO₂ and NO₂ levels.
-</p>
+
+<h2>📤 Upload Pollution Photo</h2>
+
+<input type="file">
+
+<button>
+
+Analyse Image
+
+</button>
+
 </div>
 
 <div class="card">
-<h2>🛰 Satellite Analysis</h2>
-<p>
-Satellite imagery identifies large-scale pollution and dust movement.
-</p>
+
+<h2>📊 AQI Prediction (24 Hours)</h2>
+
+<canvas id="aqiChart"></canvas>
+
 </div>
 
 <div class="card">
-<h2>🤖 AI Prediction</h2>
-<p>
-Machine Learning forecasts pollution spikes up to 24 hours in advance.
-</p>
-</div>
 
-<div class="card">
-<h2>🚨 Smart Alerts</h2>
-<p>
-Automatic notifications help municipal teams respond faster.
-</p>
-</div>
+<h2>🚨 Municipal Alerts</h2>
 
-<div class="card">
-<h2>🌍 Cleaner Communities</h2>
-<p>
-Data-driven decisions reduce pollution and improve neighbourhood health.
-</p>
+<ul>
+
+<li>Smoke detected near Sector 12</li>
+
+<li>Dust hotspot near Highway</li>
+
+<li>Deploy water mist cannon</li>
+
+<li>Clean-up crew notified</li>
+
+</ul>
+
 </div>
 
 </section>
 
 <footer>
 
-Made for Smart City Innovation Challenge • 2026
+Made with ❤️ for Smart India Innovation Challenge 2026
 
 </footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
