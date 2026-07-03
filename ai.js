@@ -1,98 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
+function airAlertAI(){
 
-const askBtn = document.getElementById("askAI");
-const userQuestion = document.getElementById("userQuestion");
-const chatArea = document.getElementById("chatArea");
+const input=document.getElementById("userQuestion");
+const chat=document.getElementById("chatArea");
 
-if(!askBtn || !userQuestion || !chatArea) return;
+const q=input.value.toLowerCase().trim();
 
-const answers = {
+if(q==="") return;
 
-aqi:"📊 Current AQI is 55 (Moderate). Air quality is acceptable for most people.",
-
-pollution:"🌫 Pollution is moderate today. PM2.5 levels are under observation.",
-
-weather:"🌤 Weather is clear with light winds and good visibility.",
-
-mask:"😷 A mask is recommended for children, elderly people and anyone with respiratory issues.",
-
-hotspot:"📍 Pollution hotspot detected near Central Kolkata. AQI is higher than surrounding areas.",
-
-pm25:"🌫 PM2.5 concentration is currently within acceptable limits.",
-
-pm10:"🌁 PM10 levels are stable today.",
-
-help:"🤖 Ask me about AQI, pollution, PM2.5, PM10, weather, hotspot or masks."
-
-};
-
-function getReply(question){
-
-question = question.toLowerCase();
-
-if(question.includes("aqi"))
-return answers.aqi;
-
-if(question.includes("pollution"))
-return answers.pollution;
-
-if(question.includes("weather"))
-return answers.weather;
-
-if(question.includes("mask"))
-return answers.mask;
-
-if(question.includes("hotspot"))
-return answers.hotspot;
-
-if(question.includes("pm2"))
-return answers.pm25;
-
-if(question.includes("pm10"))
-return answers.pm10;
-
-return answers.help;
-
-}
-
-function sendMessage(){
-
-const text=userQuestion.value.trim();
-
-if(text==="") return;
-
-chatArea.innerHTML+=`
-<div class="user-message">${text}</div>
+chat.innerHTML+=`
+<div class="user-message">${input.value}</div>
 `;
 
-userQuestion.value="";
+let ans="🤖 I can answer questions about AQI, pollution, weather, PM2.5 and hotspots.";
 
-chatArea.scrollTop=chatArea.scrollHeight;
+if(q.includes("aqi"))
+ans="📊 Current AQI is 55 (Moderate).";
+
+else if(q.includes("weather"))
+ans="🌤 Weather is clear today.";
+
+else if(q.includes("pollution"))
+ans="🌫 Pollution is moderate today.";
+
+else if(q.includes("mask"))
+ans="😷 Wear a mask if AQI exceeds 100.";
+
+else if(q.includes("hotspot"))
+ans="📍 Hotspot detected near Central Kolkata.";
+
+else if(q.includes("pm"))
+ans="🌫 PM2.5 is currently within acceptable limits.";
 
 setTimeout(()=>{
 
-chatArea.innerHTML+=`
-<div class="ai-message">${getReply(text)}</div>
+chat.innerHTML+=`
+<div class="ai-message">${ans}</div>
 `;
 
-chatArea.scrollTop=chatArea.scrollHeight;
+chat.scrollTop=chat.scrollHeight;
 
-},600);
+},500);
 
-}
-
-askBtn.addEventListener("click",sendMessage);
-
-userQuestion.addEventListener("keydown",e=>{
-
-if(e.key==="Enter"){
-
-e.preventDefault();
-
-sendMessage();
+input.value="";
 
 }
-
-});
-
-});
