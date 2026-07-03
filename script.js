@@ -568,7 +568,8 @@ if (chartCanvas) {
 
         options: {
 
-            responsive: true,
+        responsive: true,
+maintainAspectRatio: false,
 
             plugins: {
 
