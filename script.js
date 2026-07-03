@@ -757,11 +757,54 @@ function askAI() {
     }, 1000);
 }
 
-askBtn.onclick = askAI;
+document.addEventListener("DOMContentLoaded", () => {
 
-userQuestion.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-        e.preventDefault();
-        askAI();
+    const askBtn = document.getElementById("askAI");
+    const userQuestion = document.getElementById("userQuestion");
+    const chatArea = document.getElementById("chatArea");
+
+    function askAI() {
+
+        const text = userQuestion.value.trim();
+
+        if (!text) return;
+
+        const user = document.createElement("div");
+        user.className = "user-message";
+        user.innerHTML = text;
+        chatArea.appendChild(user);
+
+        userQuestion.value = "";
+
+        const ai = document.createElement("div");
+        ai.className = "ai-message";
+
+        const q = text.toLowerCase();
+
+        if (q.includes("aqi"))
+            ai.innerHTML = "📊 Current AQI is 55 (Moderate).";
+        else if (q.includes("mask"))
+            ai.innerHTML = "😷 A mask is recommended if AQI exceeds 100.";
+        else if (q.includes("pollution"))
+            ai.innerHTML = "🌫 Pollution is moderate today.";
+        else if (q.includes("weather"))
+            ai.innerHTML = "🌤 Weather is clear with light wind.";
+        else
+            ai.innerHTML = "🤖 I can answer questions about AQI, pollution, weather and hotspots.";
+
+        setTimeout(() => {
+            chatArea.appendChild(ai);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }, 600);
     }
+
+    askBtn.addEventListener("click", askAI);
+
+    userQuestion.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            askAI();
+        }
+    });
+
 });
