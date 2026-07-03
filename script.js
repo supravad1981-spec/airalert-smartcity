@@ -699,6 +699,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const askBtn = document.getElementById("askAI");
 const userQuestion = document.getElementById("userQuestion");
 const chatArea = document.getElementById("chatArea");
+
 const aiReplies = {
     pollution: "🚨 Pollution levels are currently moderate. Sensitive groups should reduce prolonged outdoor activity.",
     aqi: "📊 Current AQI is around 55, which falls under the Moderate category.",
@@ -709,60 +710,58 @@ const aiReplies = {
     default: "🤖 I can answer questions about AQI, pollution, PM2.5, hotspots, masks, weather and air quality."
 };
 
-askBtn.addEventListener("click", () => {
+function askAI() {
 
     const text = userQuestion.value.trim();
 
-    if(text==="") return;
+    if (!text) return;
 
     const userMsg = document.createElement("div");
-    userMsg.className="user-message";
-    userMsg.innerHTML=text;
+    userMsg.className = "user-message";
+    userMsg.innerHTML = text;
 
     chatArea.appendChild(userMsg);
 
-    userQuestion.value="";
+    userQuestion.value = "";
 
-    chatArea.scrollTop=chatArea.scrollHeight;
-
-    const typing=document.createElement("div");
-    typing.className="ai-message";
-    typing.innerHTML="🤖 Thinking...";
+    const typing = document.createElement("div");
+    typing.className = "ai-message";
+    typing.innerHTML = "🤖 Thinking...";
     chatArea.appendChild(typing);
 
-    setTimeout(()=>{
+    chatArea.scrollTop = chatArea.scrollHeight;
+
+    setTimeout(() => {
 
         typing.remove();
 
-        let answer=aiReplies.default;
+        const q = text.toLowerCase();
 
-        const q=text.toLowerCase();
+        let answer = aiReplies.default;
 
-        if(q.includes("aqi")) answer=aiReplies.aqi;
-        else if(q.includes("pollution")) answer=aiReplies.pollution;
-        else if(q.includes("mask")) answer=aiReplies.mask;
-        else if(q.includes("pm")) answer=aiReplies.pm25;
-        else if(q.includes("hotspot")) answer=aiReplies.hotspot;
-        else if(q.includes("weather")) answer=aiReplies.weather;
+        if (q.includes("aqi")) answer = aiReplies.aqi;
+        else if (q.includes("mask")) answer = aiReplies.mask;
+        else if (q.includes("pollution")) answer = aiReplies.pollution;
+        else if (q.includes("pm")) answer = aiReplies.pm25;
+        else if (q.includes("hotspot")) answer = aiReplies.hotspot;
+        else if (q.includes("weather")) answer = aiReplies.weather;
 
-        const ai=document.createElement("div");
-        ai.className="ai-message";
-        ai.innerHTML=answer;
+        const ai = document.createElement("div");
+        ai.className = "ai-message";
+        ai.innerHTML = answer;
 
         chatArea.appendChild(ai);
 
-        chatArea.scrollTop=chatArea.scrollHeight;
+        chatArea.scrollTop = chatArea.scrollHeight;
 
-    },1200);
+    }, 1000);
+}
 
-});
+askBtn.onclick = askAI;
 
-userQuestion.addEventListener("keypress",function(e){
-
-    if(e.key==="Enter"){
-
-        askBtn.click();
-
+userQuestion.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        askAI();
     }
-
 });
