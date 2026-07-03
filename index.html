@@ -3,45 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AirAlert SmartCity</title>
 
 <link rel="stylesheet" href="style.css">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
 
 </head>
 
 <body>
 
-<nav>
+<!-- Loading -->
+
+<div id="loader">
+<div class="spinner"></div>
+<h2>Loading AirAlert...</h2>
+</div>
+
+<!-- Notification -->
+
+<div id="notification">
+<i class="fa-solid fa-circle-check"></i>
+Welcome to AirAlert SmartCity
+</div>
+
+<!-- Navbar -->
+
+<header>
 
 <div class="logo">
 🌍 AirAlert SmartCity
 </div>
 
-<ul>
+<nav id="nav">
 
-<li>Home</li>
+<a href="#home">Home</a>
 
-<li>Dashboard</li>
+<a href="#dashboard">Dashboard</a>
 
-<li>Prediction</li>
+<a href="#prediction">Prediction</a>
 
-<li>Alerts</li>
+<a href="#reports">Reports</a>
 
-<li>About</li>
-
-</ul>
+<a href="#about">About</a>
 
 </nav>
 
-<section class="hero">
+<div class="menu">
+
+<i class="fas fa-bars" id="menuBtn"></i>
+
+<i class="fas fa-moon" id="darkBtn"></i>
+
+</div>
+
+</header>
+
+<!-- Hero -->
+
+<section id="home" class="hero">
+
+<div class="hero-content">
 
 <h1>
 AI Powered Pollution Monitoring Platform
@@ -49,113 +77,192 @@ AI Powered Pollution Monitoring Platform
 
 <p>
 
-Build a neighbourhood-level pollution map by combining citizen uploaded images, IoT sensor readings and satellite imagery. Detect pollution hotspots before they become dangerous.
+Build neighbourhood-level pollution maps using AI, IoT Sensors and citizen reports.
 
 </p>
 
 <button>
-
-View Live Dashboard
-
+View Dashboard
 </button>
+
+</div>
 
 </section>
 
+<!-- Stats -->
+
 <section class="stats">
 
-<div class="box">
+<div class="card">
 
-<h2>126</h2>
+<h2 class="counter" data-target="126">0</h2>
 
 <p>Citizen Reports</p>
 
 </div>
 
-<div class="box">
+<div class="card">
 
-<h2>42</h2>
+<h2 class="counter" data-target="42">0</h2>
 
-<p>Hotspots Detected</p>
+<p>Hotspots</p>
 
 </div>
 
-<div class="box">
+<div class="card">
 
-<h2>87</h2>
+<h2 class="counter" data-target="87">0</h2>
 
 <p>Live Sensors</p>
 
 </div>
 
-<div class="box">
+<div class="card">
 
-<h2>94%</h2>
+<h2 class="counter" data-target="94">0</h2>
 
-<p>Prediction Accuracy</p>
+<p>Accuracy %</p>
 
 </div>
 
 </section>
 
-<section class="dashboard">
+<!-- Dashboard -->
 
-<div class="card">
+<section id="dashboard" class="dashboard">
 
-<h2>🗺 Pollution Heat Map</h2>
+<h2>Live Dashboard</h2>
 
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200" width="100%">
+<div class="dashboard-grid">
+
+<div class="glass">
+
+<i class="fas fa-cloud"></i>
+
+<h3>Air Quality</h3>
+
+<h1>Good</h1>
 
 </div>
 
-<div class="card">
+<div class="glass">
 
-<h2>📤 Upload Pollution Photo</h2>
+<i class="fas fa-temperature-half"></i>
 
-<input type="file">
+<h3>Temperature</h3>
 
-<button>
+<h1>31°C</h1>
 
-Analyse Image
+</div>
+
+<div class="glass">
+
+<i class="fas fa-smog"></i>
+
+<h3>PM2.5</h3>
+
+<h1>48 AQI</h1>
+
+</div>
+
+<div class="glass">
+
+<i class="fas fa-wind"></i>
+
+<h3>Wind</h3>
+
+<h1>14 km/h</h1>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Prediction -->
+
+<section id="prediction" class="prediction">
+
+<h2>AI Prediction</h2>
+
+<div class="prediction-box">
+
+<div class="progress">
+
+<div class="fill"></div>
+
+</div>
+
+<p>
+
+Expected pollution increase tomorrow:
+
+<strong>+12%</strong>
+
+</p>
+
+</div>
+
+</section>
+
+<!-- Reports -->
+
+<section id="reports">
+
+<h2>Citizen Report</h2>
+
+<div class="report-box">
+
+<input placeholder="Enter Location">
+
+<textarea placeholder="Describe pollution"></textarea>
+
+<button>Submit Report</button>
+
+</div>
+
+</section>
+
+<!-- Floating Button -->
+
+<button id="topBtn">
+
+<i class="fas fa-arrow-up"></i>
 
 </button>
 
-</div>
-
-<div class="card">
-
-<h2>📊 AQI Prediction (24 Hours)</h2>
-
-<canvas id="aqiChart"></canvas>
-
-</div>
-
-<div class="card">
-
-<h2>🚨 Municipal Alerts</h2>
-
-<ul>
-
-<li>Smoke detected near Sector 12</li>
-
-<li>Dust hotspot near Highway</li>
-
-<li>Deploy water mist cannon</li>
-
-<li>Clean-up crew notified</li>
-
-</ul>
-
-</div>
-
-</section>
+<!-- Footer -->
 
 <footer>
 
-Made with ❤️ for Smart India Innovation Challenge 2026
+<h3>AirAlert SmartCity</h3>
+
+<p>
+
+AI Powered Pollution Monitoring Platform
+
+</p>
+
+<div class="social">
+
+<i class="fab fa-github"></i>
+
+<i class="fab fa-linkedin"></i>
+
+<i class="fab fa-twitter"></i>
+
+</div>
+
+<p>
+
+© 2026 AirAlert SmartCity
+
+</p>
 
 </footer>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
