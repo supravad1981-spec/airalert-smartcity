@@ -697,7 +697,23 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 =========================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+const aiReplies = {
 
+    pollution: "🚨 Pollution levels are currently moderate. Sensitive groups should reduce prolonged outdoor activity.",
+
+    aqi: "📊 Current AQI is around 55, which falls under the Moderate category.",
+
+    mask: "😷 Wearing a mask is recommended if AQI exceeds 100.",
+
+    pm25: "🌫 PM2.5 levels are currently within safe limits.",
+
+    hotspot: "📍 Current hotspot detected near Central Kolkata based on simulated sensor readings.",
+
+    weather: "🌤 Weather is clear with light wind.",
+
+    default: "🤖 I can answer questions about AQI, pollution, weather and hotspots."
+
+};
 const askBtn = document.getElementById("askAI");
 const userQuestion = document.getElementById("userQuestion");
 const chatArea = document.getElementById("chatArea");
@@ -776,6 +792,6 @@ userQuestion.addEventListener("keydown",function(e){
 
 });
 
-});
+
 
 
