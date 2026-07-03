@@ -604,11 +604,20 @@ const mapContainer = document.getElementById("pollutionMap");
 
 if (mapContainer) {
 
-    const map = L.map("pollutionMap").setView([22.5726, 88.3639], 11);
+    const map = L.map("pollutionMap");
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; OpenStreetMap contributors"
+map.setView([22.5726, 88.3639], 11);
+
+setTimeout(() => {
+    map.invalidateSize();
+}, 300);
+
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,        attribution: "&copy; OpenStreetMap contributors"
     }).addTo(map);
+   setTimeout(() => {
+    map.invalidateSize();
+}, 500);
 
     const locations = [
 
